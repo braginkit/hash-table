@@ -1,0 +1,40 @@
+#ifndef HASHTABLE_H
+#define HASHTABLE_H
+#include <iostream>
+#include <string>
+using namespace std;
+#define PRIME_SIZE 100
+
+class HashTable // Хеш-таблица, представленная в виде массива элементов (которые в свою очередь представляют список).
+{
+    int * table[PRIME_SIZE];
+    
+    // Считает сумму ASCII кодов, делит на константу и
+    // получает остаток от деления.
+    static int hash (string str)
+    {
+        int asciisum = 0;
+        for (int i = 0; i < str.length(); i++)
+        {
+            asciisum += str[i];
+        }
+        return asciisum % PRIME_SIZE;
+    }
+
+public:
+
+    HashTable()
+    {
+        for (int i = 0; i < PRIME_SIZE; i++)
+            table[i] = nullptr;
+    }
+
+    ~HashTable()
+    {
+        for ( int i = 0; i < PRIME_SIZE; i++ )
+            delete table[i];
+    }
+
+};
+
+#endif // HASHTABLE_H
